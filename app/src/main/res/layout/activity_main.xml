@@ -20,8 +20,10 @@
             android:layout_alignParentRight="true"
             android:text="Guess"
             android:textSize="16sp"
+            android:onClick="guess"
             />
         <EditText
+            android:id="@+id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -44,6 +46,7 @@
             android:layout_weight="1"
             android:text="New"
             android:textAllCaps="false"
+            android:onClick="newGame"
             />
         <Button
             android:layout_width="0dp"
@@ -51,6 +54,7 @@
             android:layout_weight="1"
             android:text="Setting"
             android:textAllCaps="false"
+            android:onClick="setting"
             />
         <Button
             android:layout_width="0dp"
@@ -58,10 +62,12 @@
             android:layout_weight="1"
             android:text="Exit"
             android:textAllCaps="false"
+            android:onClick="exit"
             />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/top"
