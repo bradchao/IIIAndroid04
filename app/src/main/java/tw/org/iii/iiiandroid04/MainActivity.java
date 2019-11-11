@@ -5,17 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
+    private String answer;
+    private int dig = 3;
+    private EditText input;
+    private TextView log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        input = findViewById(R.id.input);
+        log = findViewById(R.id.log);
+        answer = createAnswer(3);
     }
 
     //  Create an answer
@@ -33,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exit(View view) {
-        createAnswer(4);
+
     }
 
     public void setting(View view) {
@@ -43,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void guess(View view) {
+        String strInput = input.getText().toString();
+        Log.v("brad", "=> " + strInput);
     }
 }
