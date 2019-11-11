@@ -17,7 +17,7 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
     private String answer;
-    private int dig = 3;
+    private int dig = 3,temp = -1;
     private EditText input;
     private TextView log;
     private int counter;
@@ -87,6 +87,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setting(View view) {
+        String[] items = {"3","4","5","6"};
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Select Game Mode")
+                .setSingleChoiceItems(items, dig - 3, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        temp = which;
+                    }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dig = temp + 3;
+                        newGame(null);
+                    }
+                })
+                .create();
+        alertDialog.show();
     }
 
     public void newGame(View view) {
@@ -102,18 +120,26 @@ public class MainActivity extends AppCompatActivity {
     public void guess(View view) {
         counter++;
         String strInput = input.getText().toString();
+        if (!isRightNumber(strInput)) {
+            return;
+        }
+
         String result = checkAB(strInput);
-        log.append(strInput + " => " + result + "\n");
+        log.append(counter + " : " + strInput + " => " + result + "\n");
 
         if (result.equals(dig + "A0B")){
             // WINNER
             showDialog(true);
-        }else if (counter == 3){
+        }else if (counter == 10){
             // LOSER
             showDialog(false);
         }
 
         input.setText("");
+    }
+
+    private boolean isRightNumber(String g){
+        return g.matches("^[0-9]{" + dig + "}$");
     }
 
     private void showDialog(boolean isWinner){
