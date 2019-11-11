@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText input;
     private TextView log;
     private int counter;
+    private long lastTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exit(View view) {
-        finish();
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setMessage("Exit?")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        alertDialog.show();
+
     }
 
     @Override
@@ -58,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Log.v("brad", "onBackPress");
+        if (System.currentTimeMillis() - lastTime > 3*1000){
+            lastTime = System.currentTimeMillis();
+            Toast.makeText(this, "back one more", Toast.LENGTH_SHORT).show();
+        }else{
+            super.onBackPressed();
+        }
     }
 
     @Override
