@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,16 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
     //  Create an answer
     private String createAnswer(int dig){
-        HashSet<Integer> set = new HashSet<>();
-        while (set.size() <dig){
-            set.add((int)(Math.random()*10));
-        }
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i=0; i<10; i++) list.add(i);
+        Collections.shuffle(list);
 
         StringBuffer sb = new StringBuffer();
-        for(Integer i : set){
-            sb.append(i);
+        for (int i=0; i<dig; i++){
+            sb.append(list.get(i));
         }
-        Log.v("brad", sb.toString());
+
         return sb.toString();
     }
 
