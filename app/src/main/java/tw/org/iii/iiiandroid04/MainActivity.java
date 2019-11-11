@@ -3,6 +3,7 @@ package tw.org.iii.iiiandroid04;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newGame(View view) {
+        Log.v("brad", "new game");
     }
 
     public void guess(View view) {
@@ -76,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(isWinner?"WINNER":"Loser")
                 .setMessage(isWinner?"恭喜老爺":"謎底為"+answer)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        newGame(null);
+                    }
+                })
                 .create();
 
         alertDialog.show();
