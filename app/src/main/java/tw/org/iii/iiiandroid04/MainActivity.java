@@ -47,14 +47,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exit(View view) {
+        finish();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.v("brad", "onDestroy");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.v("brad", "onBackPress");
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Log.v("brad", "finish");
     }
 
     public void setting(View view) {
     }
 
     public void newGame(View view) {
-        Log.v("brad", "new game");
+        //Log.v("brad", "new game");
+        counter = 0;
+        input.setText("");
+        log.setText("");
+        answer = createAnswer(dig);
+
+
     }
 
     public void guess(View view) {
