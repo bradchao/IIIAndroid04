@@ -1,5 +1,6 @@
 package tw.org.iii.iiiandroid04;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -62,12 +63,25 @@ public class MainActivity extends AppCompatActivity {
 
         if (result.equals(dig + "A0B")){
             // WINNER
-        }else if (counter == 10){
+            showDialog(true);
+        }else if (counter == 3){
             // LOSER
+            showDialog(false);
         }
 
         input.setText("");
     }
+
+    private void showDialog(boolean isWinner){
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle(isWinner?"WINNER":"Loser")
+                .setMessage(isWinner?"恭喜老爺":"謎底為"+answer)
+                .create();
+
+        alertDialog.show();
+
+    }
+
 
     private String checkAB(String guess){
         int a, b; a = b = 0;
