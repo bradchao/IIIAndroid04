@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private int dig = 3;
     private EditText input;
     private TextView log;
+    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         input = findViewById(R.id.input);
         log = findViewById(R.id.log);
-        answer = createAnswer(3);
+        answer = createAnswer(dig);
         Log.v("brad", answer);
     }
 
@@ -54,9 +55,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void guess(View view) {
+        counter++;
         String strInput = input.getText().toString();
         String result = checkAB(strInput);
         log.append(strInput + " => " + result + "\n");
+
+        if (result.equals(dig + "A0B")){
+            // WINNER
+        }else if (counter == 10){
+            // LOSER
+        }
+
         input.setText("");
     }
 
